@@ -1,0 +1,8 @@
+{
+    "apps": [
+      {
+        "name": "frontend-evoting",
+        "script": "yarn dev"
+      }
+    ]
+}
