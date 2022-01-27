@@ -7,7 +7,9 @@ echo "Deploying application ..."
 
 # Update codebase
 git fetch origin main
+echo "failed 1"
 git reset --hard origin/main
+echo "failed 2"
 
 echo "Installing dependencies 🛠"
 yarn install
