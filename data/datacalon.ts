@@ -27,9 +27,6 @@ const calon: CalonType[] = [
             },
         ]
     }
-    
-    
-
 ]
 
 export default calon;
