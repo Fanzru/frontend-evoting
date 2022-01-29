@@ -1,8 +1,12 @@
 import { useState } from "react"
 import CardCalon from "../components/pemilihan/cardCalon"
 import data from "../data/datacalon"
+import { useSelector, useDispatch } from 'react-redux'
+import {selectCalonValue, changeCalon} from "../redux/calonSlice"
 
 const Pemilihan = () => {
+  const calon = useSelector(selectCalonValue)
+  
   const [vote , setVote] = useState(0)
   const [warn, setWarn] = useState(true)
   const numberCalon: any = []
@@ -30,8 +34,8 @@ const Pemilihan = () => {
               {
                 data.map((a, i) =>{
                   return (
-                  <div key={i} className="border-2 md:bg-white rounded-xl">
-                    <CardCalon data={a}/>
+                  <div key={i}>
+                    <CardCalon data={a} />
                   </div>
                   )
                 })
