@@ -2,6 +2,7 @@ import { UserType } from "../../types/userCalon";
 import Image from 'next/image'
 import { useSelector, useDispatch } from 'react-redux'
 import {selectCalonValue, changeCalon} from "../../redux/calonSlice"
+import { changeSubmit } from "../../redux/submitCalonSlice";
 
 const CardCalon = ({...props}) => {
 
@@ -12,7 +13,10 @@ const CardCalon = ({...props}) => {
 
   return (
       <button
-        onClick={()=>{dispatch(changeCalon(props.data.nomor_calon))}} 
+        onClick={()=>{
+          dispatch(changeCalon(props.data.nomor_calon))
+          dispatch(changeSubmit(false))
+        }} 
         className={ calon===props.data.nomor_calon? `border-2 bg-gray-200 rounded-xl ` : "border-2 md:bg-white rounded-xl hover:bg-gray-200"} >
           <div className=" text-center text-lg mb-2 font-bold mt-2">
             {`Nomor Calon ${props.data.nomor_calon}`}

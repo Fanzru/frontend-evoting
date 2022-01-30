@@ -1,11 +1,12 @@
 import { useState } from "react"
+import { useSelector } from "react-redux"
 import CardCalon from "../components/pemilihan/cardCalon"
 import data from "../data/datacalon"
-import { useSelector, useDispatch } from 'react-redux'
-import {selectCalonValue, changeCalon} from "../redux/calonSlice"
+import { selectSubmitCalonValue } from "../redux/submitCalonSlice"
+
 
 const Pemilihan = () => {
-  const calon = useSelector(selectCalonValue)
+  const statusCalon = useSelector(selectSubmitCalonValue)
   
   const [vote , setVote] = useState(0)
   const [warn, setWarn] = useState(true)
@@ -16,11 +17,10 @@ const Pemilihan = () => {
 
   const handleVote = (e: any) => {
     e.preventDefault()
-    if (numberCalon.includes(vote)){
-      // logic to push api
+    if (statusCalon) {
+      alert('Maaf anda belum memilih')
     } else {
-      alert("Maaf inputan tidak valid!")
-      setWarn(false)
+      // logic api
     }
   }
 
@@ -42,7 +42,7 @@ const Pemilihan = () => {
               }
             </div>
             <div className={`flex flex-col mb-10 mt-10`}>
-              <input
+              {/* <input
                 className="border w-[200px] h-[40px] p-2 rounded-md"
                 placeholder="Example Input: 12"
                 onChange={(e: any) => {
@@ -58,10 +58,10 @@ const Pemilihan = () => {
               {
                 !warn ?
                 <div className="text-center text-red-500 mt-2">Masukan Tidak Valid</div> : <></>
-              }
+              } */}
               <button
                 onClick={handleVote}
-                className="border mx-auto px-4 py-2 mt-4 bg-gray-200 rounded-md">
+                className={`border mx-auto px-4 py-2 mt-4 rounded-md text-white ${statusCalon? "bg-red-200":  "bg-red-400"}`} disabled={statusCalon}>
                 Vote
               </button>
             </div>
