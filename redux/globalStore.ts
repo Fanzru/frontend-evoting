@@ -2,11 +2,16 @@ import { configureStore,combineReducers } from '@reduxjs/toolkit'
 import calonSlice from './calonSlice';
 import submitCalonSlice from './submitCalonSlice';
 
-export const GlobalStore = configureStore({
+
+const GlobalStore = configureStore({
   reducer: combineReducers({
-      calon: calonSlice,
-      submit: submitCalonSlice
+    calon: calonSlice,
+    submit: submitCalonSlice
   }),
 });
 
-export default { GlobalStore };
+export type RootState = ReturnType<typeof GlobalStore.getState>
+
+export default GlobalStore;
+
+

@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
+import { RootState } from './globalStore';
 
 const calonSlice = createSlice({
     name: 'calon',
@@ -14,6 +15,6 @@ const calonSlice = createSlice({
 
 export const {changeCalon} = calonSlice.actions;
 
-export const selectCalonValue = (state: any) => state.calon.value;
+export const selectCalonValue = (state: RootState) => state.calon.value;
 
 export default calonSlice.reducer;
