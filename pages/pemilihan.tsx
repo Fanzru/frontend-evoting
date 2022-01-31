@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import CardCalon from "../components/pemilihan/cardCalon"
@@ -8,7 +9,7 @@ import { selectSubmitCalonValue } from "../redux/submitCalonSlice"
 
 const Pemilihan = () => {
   const statusCalon = useSelector(selectSubmitCalonValue)
-  
+  const router = useRouter();
   const [vote , setVote] = useState(0)
   const [warn, setWarn] = useState(true)
   const numberCalon: any = []
@@ -21,7 +22,7 @@ const Pemilihan = () => {
     if (statusCalon) {
       alert('Maaf anda belum memilih')
     } else {
-      // logic api
+      router.push('/selesai')
     }
   }
 

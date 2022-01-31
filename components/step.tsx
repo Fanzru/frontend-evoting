@@ -7,43 +7,64 @@ const Step = () => {
   const urlString = router.pathname;
   const arrUrl = urlString.split('/');
   
-  return (  
-      <div className="w-full pt-3 pb-6">
-        <div className="flex items-center justify-center">
-
-          <div className="flex items-center justify-center w-1/3">
-            <div className="flex flex-col items-center">
-              <Link href={"/dev"}>
-                <a className={`rounded-full w-10 h-10 flex ${arrUrl[1] == 'dev' ? 'bg-red-400' : 'bg-gray-300'} items-center justify-center`}>
-                  <FaIdCardAlt />
-                </a>
-              </Link>
-            </div>
-            <span className="w-full mx-3 h-3 bg-gray-300 rounded-full"></span>
-          </div>
-          
-          <div className="flex items-center justify-center w-1/3">
-            <div className="flex flex-col items-center">
-              <Link href={"/foto"}>
-                <a className="rounded-full w-10 h-10 flex bg-gray-300 items-center justify-center">
-                  <FaUser />
-                </a>
-              </Link>
-            </div>
-            <span className="w-full mx-3 h-3 bg-gray-300 rounded-full"></span>
-          </div>
-
+  return (
+    <div className="w-full pt-3 pb-6">
+      <div className="flex items-center justify-center">
+        <div className="flex w-1/3 items-center justify-center">
           <div className="flex flex-col items-center">
-            <Link href={"/pemilihan"}>
-              <a className="rounded-full w-10 h-10 flex bg-gray-300 items-center justify-center">
-                <FaUserCheck />
+            <Link href={'/ktm'}>
+              <a
+                className={`flex h-10 w-10 rounded-full ${
+                  arrUrl[1] == 'ktm'
+                    ? 'bg-red-400'
+                    : arrUrl[1] == 'foto'
+                    ? 'bg-green-400'
+                    : arrUrl[1] == 'pemilihan'
+                    ? 'bg-green-400'
+                    : 'bg-gray-300'
+                } items-center justify-center`}
+              >
+                <FaIdCardAlt />
               </a>
             </Link>
           </div>
+          <span className="mx-3 h-3 w-full rounded-full bg-gray-300"></span>
+        </div>
+
+        <div className="flex w-1/3 items-center justify-center">
+          <div className="flex flex-col items-center">
+            <Link href={'/foto'}>
+              <a
+                className={`flex h-10 w-10 rounded-full ${
+                  arrUrl[1] == 'foto'
+                    ? 'bg-red-400'
+                    : arrUrl[1] == 'pemilihan'
+                    ? 'bg-green-400'
+                    : 'bg-gray-300'
+                } items-center justify-center`}
+              >
+                <FaUser />
+              </a>
+            </Link>
+          </div>
+          <span className="mx-3 h-3 w-full rounded-full bg-gray-300"></span>
+        </div>
+
+        <div className="flex flex-col items-center">
+          <Link href={'/pemilihan'}>
+            <a
+              className={`flex h-10 w-10 rounded-full ${
+                arrUrl[1] == 'pemilihan' ? 'bg-red-400' : 'bg-gray-300'
+              } items-center justify-center`}
+            >
+              <FaUserCheck />
+            </a>
+          </Link>
         </div>
       </div>
+    </div>
     // </div>
-  );
+  )
 };
 
 export default Step;

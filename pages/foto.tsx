@@ -43,7 +43,7 @@ const Dev = () => {
         <div className="flex flex-col items-center justify-center">
           <Step />
           <div className="mx-4 flex flex-col items-center justify-center md:mx-8">
-            <h1 className="mb-6 text-2xl font-bold">FOTO KTM</h1>
+            <h1 className="mb-6 text-2xl font-bold">FOTO DIRI</h1>
             {!isCapture ? (
               <Webcam
                 ref={webcamRef}
@@ -58,7 +58,7 @@ const Dev = () => {
             <div className="grid w-full grid-cols-3 items-center justify-evenly justify-items-center py-5">
               <span>
                 {isCapture && (
-                  <Link href={'/foto'}>
+                  <Link href={'/pemilihan'}>
                     <a>
                       <ButtonCapture>
                         <HiCheck />
