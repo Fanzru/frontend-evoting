@@ -43,7 +43,6 @@ const Dev = () => {
           <div className="flex flex-col items-center justify-center">
             <h1 className="text-2xl font-bold py-6">FOTO KTM</h1>
             <Webcam 
-              mirrored={true} 
               ref={webcamRef} 
               screenshotFormat="image/jpeg" 
               screenshotQuality={1}
