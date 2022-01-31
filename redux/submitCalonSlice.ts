@@ -1,3 +1,4 @@
+import { RootState } from './globalStore';
 import {createSlice} from '@reduxjs/toolkit'
 
 const submiteCalonSlice = createSlice({
@@ -14,6 +15,6 @@ const submiteCalonSlice = createSlice({
 
 export const {changeSubmit} = submiteCalonSlice.actions;
 
-export const selectSubmitCalonValue = (state: any) => state.submit.status;
+export const selectSubmitCalonValue = (state: RootState) => state.submit.status;
 
 export default submiteCalonSlice.reducer;
