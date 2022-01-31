@@ -16,8 +16,6 @@ const Dev = () => {
   const [imgSrc, setImgSrc] = useState(null);
   const [facingMode, setFacingMode] = useState(FACING_MODE_USER);
 
-  
-
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImgSrc(imageSrc);
@@ -31,17 +29,14 @@ const Dev = () => {
           : FACING_MODE_USER
     );
   }, []);
-  
-  
-
 
   return (
     <>
-      <div className="items-center justify-center">
-        <div className="mx-8 py-3 flex flex-col items-center justify-center">
+      <div className="bg-gray-100 min-h-screen">
+        <div className="flex flex-col items-center justify-center">
           <Step />
-          <div className="flex flex-col items-center justify-center">
-            <h1 className="text-2xl font-bold py-6">FOTO KTM</h1>
+          <div className="flex flex-col items-center justify-center mx-4 md:mx-8">
+            <h1 className="text-2xl font-bold mb-6">FOTO KTM</h1>
             <Webcam 
               ref={webcamRef} 
               screenshotFormat="image/jpeg" 
@@ -53,12 +48,13 @@ const Dev = () => {
                 src={imgSrc}
               />
             )}
-          </div>
-          <div className="flex justify-end">
-            <button className="w-10 h-10 mt-10 bg-red-500 rounded-full hover:bg-red-600 focus:ring-offset-2 focus:ring-2 ring-red-500" onClick={capture}></button>
-            <button className="w-10 h-10 mt-10 bg-gray-300 rounded-full hover:bg-gray-400 flex justify-center items-center text-white text-lg" onClick={handleClick}>
-              <HiRefresh />
-            </button>
+            <div className="w-full justify-evenly items-center py-5 grid grid-cols-3 justify-items-center">
+              <span></span>
+              <button className="w-10 h-10 bg-red-500 rounded-full hover:bg-red-600 focus:ring-offset-2 focus:ring-2 ring-red-500" onClick={capture}></button>
+              <button className="w-10 h-10 bg-gray-300 rounded-full hover:bg-gray-400 flex justify-center items-center text-white text-lg" onClick={handleClick}>
+                <HiRefresh />
+              </button>
+            </div>
           </div>
         </div>
       </div>

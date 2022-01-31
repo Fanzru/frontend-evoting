@@ -8,7 +8,7 @@ const Step = () => {
   const arrUrl = urlString.split('/');
   
   return (  
-      <div className="w-full">
+      <div className="w-full pt-3 pb-6">
         <div className="flex items-center justify-center">
 
           <div className="flex items-center justify-center w-1/3">

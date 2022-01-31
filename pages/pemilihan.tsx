@@ -27,10 +27,10 @@ const Pemilihan = () => {
 
   return (
     <div className="md:bg-gray-100 border min-h-screen">
-      <div className="mx-8 mt-3">
+      <div className="flex flex-col items-center">
         <Step />
-        <div className="flex flex-col items-center">
-          <h1 className="text-2xl font-bold py-6">PILIH CALON ANDA</h1>
+        <div className="flex flex-col items-center justify-center mx-4 md:mx-8">
+          <h1 className="text-2xl font-bold mb-6">PILIH CALON ANDA</h1>
           <div className={`flex flex-wrap w-full items-center justify-center gap-4 `}>
             {
               data.map((a, i) =>{
@@ -66,6 +66,7 @@ const Pemilihan = () => {
               Vote
             </button>
           </div>
+          
         </div>
       </div>
     </div>
