@@ -1,18 +1,40 @@
 import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import Step from "../components/step";
+import { HiRefresh } from "react-icons/hi";
 
 const Dev = () => {
+  const FACING_MODE_USER = "user";
+  const FACING_MODE_ENVIRONMENT = "environment";
+
+  const videoConstraints: any = {
+    // aspectRatio: 0.75
+    facingMode: FACING_MODE_USER
+  }
+
   const webcamRef: any = useRef("");
   const [imgSrc, setImgSrc] = useState(null);
+  const [facingMode, setFacingMode] = useState(FACING_MODE_USER);
+
+  
+
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImgSrc(imageSrc);
   }, [webcamRef, setImgSrc]);
+
+  const handleClick = useCallback(() => {
+    setFacingMode(
+      prevState =>
+        prevState === FACING_MODE_USER
+          ? FACING_MODE_ENVIRONMENT
+          : FACING_MODE_USER
+    );
+  }, []);
   
-  const videoConstraints = {
-    aspectRatio: 0.75
-  }
+  
+
+
   return (
     <>
       <div className="items-center justify-center">
@@ -25,7 +47,7 @@ const Dev = () => {
               ref={webcamRef} 
               screenshotFormat="image/jpeg" 
               screenshotQuality={1}
-              videoConstraints={videoConstraints}
+              videoConstraints={{...videoConstraints, facingMode}}
             />
             {imgSrc && (
               <img
@@ -35,7 +57,9 @@ const Dev = () => {
           </div>
           <div className="flex justify-end">
             <button className="w-10 h-10 mt-10 bg-red-500 rounded-full hover:bg-red-600 focus:ring-offset-2 focus:ring-2 ring-red-500" onClick={capture}></button>
-            {/* <button className="w-10 h-10 mt-10 bg-red-500 rounded-full hover:bg-red-600 focus:ring-offset-2 focus:ring-2 ring-red-500" onClick={capture}></button> */}
+            <button className="w-10 h-10 mt-10 bg-gray-300 rounded-full hover:bg-gray-400 flex justify-center items-center text-white text-lg" onClick={handleClick}>
+              <HiRefresh />
+            </button>
           </div>
         </div>
       </div>
