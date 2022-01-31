@@ -10,25 +10,34 @@ const Dev = () => {
     setImgSrc(imageSrc);
   }, [webcamRef, setImgSrc]);
   
+  const videoConstraints = {
+    aspectRatio: 0.75
+  }
   return (
     <>
-      <div className="flex flex-col items-center justify-center py-3">
-      <Step />
-        <div className="flex items-center justify-center py-3">
-          <Webcam 
-            mirrored={true} 
-            ref={webcamRef} 
-            screenshotFormat="image/jpeg" 
-            screenshotQuality={1}
-            // videoConstraints={videoConstraints}
-          />
-          {imgSrc && (
-            <img
-              src={imgSrc}
+      <div className="items-center justify-center">
+        <div className="mx-8 py-3 flex flex-col items-center justify-center">
+          <Step />
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="text-2xl font-bold py-6">FOTO KTM</h1>
+            <Webcam 
+              mirrored={true} 
+              ref={webcamRef} 
+              screenshotFormat="image/jpeg" 
+              screenshotQuality={1}
+              videoConstraints={videoConstraints}
             />
-          )}
+            {imgSrc && (
+              <img
+                src={imgSrc}
+              />
+            )}
+          </div>
+          <div className="flex justify-end">
+            <button className="w-10 h-10 mt-10 bg-red-500 rounded-full hover:bg-red-600 focus:ring-offset-2 focus:ring-2 ring-red-500" onClick={capture}></button>
+            {/* <button className="w-10 h-10 mt-10 bg-red-500 rounded-full hover:bg-red-600 focus:ring-offset-2 focus:ring-2 ring-red-500" onClick={capture}></button> */}
+          </div>
         </div>
-        <button className="w-10 h-10 mt-10 bg-red-500 rounded-full hover:bg-red-600 focus:ring-offset-2 focus:ring-2 ring-red-500" onClick={capture}></button>
       </div>
     </>
   );
