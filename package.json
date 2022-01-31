@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
+    "@types/react-redux": "^7.1.22",
     "next": "latest",
     "nextjs-progressbar": "^0.0.13",
     "react": "^17.0.2",

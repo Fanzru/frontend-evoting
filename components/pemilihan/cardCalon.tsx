@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useSelector, useDispatch } from 'react-redux'
 import {selectCalonValue, changeCalon} from "../../redux/calonSlice"
 import { changeSubmit } from "../../redux/submitCalonSlice";
+import { useEffect } from "react";
 
 const CardCalon = ({...props}) => {
 
