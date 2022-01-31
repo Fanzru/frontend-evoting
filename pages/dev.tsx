@@ -3,7 +3,7 @@ import Webcam from "react-webcam";
 import Step from "../components/step";
 
 const Dev = () => {
-  const webcamRef = useRef(null);
+  const webcamRef: any = useRef("");
   const [imgSrc, setImgSrc] = useState(null);
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
