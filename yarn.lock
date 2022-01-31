@@ -744,17 +744,11 @@ react-dom@^17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-<<<<<<< HEAD
 react-icons@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.3.1.tgz#2fa92aebbbc71f43d2db2ed1aed07361124e91ca"
   integrity sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==
 
-react-webcam@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/react-webcam/-/react-webcam-6.0.1.tgz#6f81f9be7b208a351a42af3288ef1149bd1eec36"
-  integrity sha512-QUacokAV3lk2XeIuRWky+ZGFv5vcwrxN634IXdntAt0eRKTl4G/dujbDN/KGizf1i9r/KB6fokqNkOnQ0bbw6g==
-=======
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -776,7 +770,11 @@ react-redux@^7.2.6:
     loose-envify "^1.4.0"
     prop-types "^15.7.2"
     react-is "^17.0.2"
->>>>>>> 7c7b228284fadcf0e6570e8ab0ceebeb6ff391b7
+
+react-webcam@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/react-webcam/-/react-webcam-6.0.1.tgz#6f81f9be7b208a351a42af3288ef1149bd1eec36"
+  integrity sha512-QUacokAV3lk2XeIuRWky+ZGFv5vcwrxN634IXdntAt0eRKTl4G/dujbDN/KGizf1i9r/KB6fokqNkOnQ0bbw6g==
 
 react@^17.0.2:
   version "17.0.2"
