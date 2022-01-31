@@ -5,7 +5,7 @@ import '../styles/tailwind.css'
 import NextNProgress from 'nextjs-progressbar'
 
 import { Provider } from "react-redux";
-import { GlobalStore } from "../redux/globalStore";
+import GlobalStore from '../redux/globalStore'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
