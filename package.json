@@ -6,11 +6,17 @@
     "start": "next start -p 3003"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.7.1",
     "next": "latest",
+    "nextjs-progressbar": "^0.0.13",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+<<<<<<< HEAD
     "react-icons": "^4.3.1",
     "react-webcam": "^6.0.1"
+=======
+    "react-redux": "^7.2.6"
+>>>>>>> 7c7b228284fadcf0e6570e8ab0ceebeb6ff391b7
   },
   "devDependencies": {
     "@types/node": "17.0.4",
