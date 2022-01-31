@@ -18,7 +18,7 @@ const Login = () => {
               <input type="text" name="Password" id="Password" className="block w-full px-3 py-2 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent" placeholder="Password" />
             </div>
             <div className="pt-3 flex items-center justify-between">
-              <button className='px-4 py-2 rounded-md bg-gray-400 text-white hover:bg-gray-500 text-sm md:text-base'>Login</button>
+              <button className='px-4 py-2 rounded-md bg-gray-400 text-white hover:bg-gray-500 text-sm md:text-base' onClick={() => {router.push("/dev")}}>Login</button>
               <div className="flex items-center space-x-2">
                 <span className='text-gray-400 text-xs md:text-sm'>Belum punya akun?</span>
                 <button className='px-4 py-2 rounded-md bg-gray-400 text-white hover:bg-gray-500  text-sm md:text-base' onClick={() => {router.push("/auth/register")}}>Register</button>
