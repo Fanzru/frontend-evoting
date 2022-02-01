@@ -3,9 +3,8 @@ import Webcam from 'react-webcam'
 import Step from '../components/step'
 import { HiCheck, HiRefresh, HiX } from 'react-icons/hi'
 import ButtonCapture from '../components/buttonCapture'
-import Link from 'next/link'
 
-const Dev = () => {
+const FotoDiri = () => {
   const FACING_MODE_USER = 'user'
   const FACING_MODE_ENVIRONMENT = 'environment'
 
@@ -15,7 +14,7 @@ const Dev = () => {
   }
 
   const webcamRef: any = useRef('')
-  const [imgSrc, setImgSrc] = useState(null)
+  const [imgSrc, setImgSrc] = useState("")
   const [facingMode, setFacingMode] = useState(FACING_MODE_USER)
   const [isCapture, setIsCapture] = useState(false)
 
@@ -23,6 +22,7 @@ const Dev = () => {
     const imageSrc = webcamRef.current.getScreenshot()
     setImgSrc(imageSrc)
     setIsCapture(true)
+
   }, [webcamRef, setImgSrc])
 
   const handleSwitch = useCallback(() => {
@@ -35,6 +35,21 @@ const Dev = () => {
 
   const handleReCapture = () => {
     setIsCapture(!isCapture)
+  }
+
+  const handleCheck = async () => {
+    const formData = new FormData()
+
+    formData.append('file', imgSrc)
+    formData.append('upload_preset', 'my-uploads')
+
+    const data = await fetch('https://api.cloudinary.com/v1_1/revdonz/upload', {
+      method: 'POST',
+      body: formData,
+    }).then((r) => r.json())
+
+    console.log('data', data)
+    
   }
 
   return (
@@ -58,13 +73,9 @@ const Dev = () => {
             <div className="grid w-full grid-cols-3 items-center justify-evenly justify-items-center py-5">
               <span>
                 {isCapture && (
-                  <Link href={'/pemilihan'}>
-                    <a>
-                      <ButtonCapture>
-                        <HiCheck />
-                      </ButtonCapture>
-                    </a>
-                  </Link>
+                  <ButtonCapture data={handleCheck}>
+                    <HiCheck />
+                  </ButtonCapture>
                 )}
               </span>
               <span className="h-12">
@@ -94,4 +105,4 @@ const Dev = () => {
   )
 }
 
-export default Dev
+export default FotoDiri

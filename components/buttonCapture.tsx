@@ -1,5 +1,4 @@
 const ButtonCapture = ({ ...props }) => {
-  console.log(props)
 
   return (
     <button
