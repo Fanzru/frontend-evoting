@@ -9,20 +9,19 @@ const FotoDiri = () => {
   const FACING_MODE_ENVIRONMENT = 'environment'
 
   const videoConstraints: any = {
-    // aspectRatio: 0.75
     facingMode: FACING_MODE_USER,
   }
 
-  const webcamRef: any = useRef('')
+  const webcamRef: any = useRef("")
   const [imgSrc, setImgSrc] = useState("")
   const [facingMode, setFacingMode] = useState(FACING_MODE_USER)
   const [isCapture, setIsCapture] = useState(false)
+  const [picture, setPicture] = useState("");
 
-  const capture = useCallback(() => {
+  const capture = useCallback(():void => {
     const imageSrc = webcamRef.current.getScreenshot()
     setImgSrc(imageSrc)
     setIsCapture(true)
-
   }, [webcamRef, setImgSrc])
 
   const handleSwitch = useCallback(() => {
@@ -39,7 +38,6 @@ const FotoDiri = () => {
 
   const handleCheck = async () => {
     const formData = new FormData()
-
     formData.append('file', imgSrc)
     formData.append('upload_preset', 'my-uploads')
 
@@ -47,9 +45,8 @@ const FotoDiri = () => {
       method: 'POST',
       body: formData,
     }).then((r) => r.json())
-
-    console.log('data', data)
     
+    setPicture(data.secure_url);
   }
 
   return (
