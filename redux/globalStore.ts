@@ -1,12 +1,13 @@
 import { configureStore,combineReducers } from '@reduxjs/toolkit'
 import calonSlice from './calonSlice';
+import captureSlice from './captureSlice';
 import submitCalonSlice from './submitCalonSlice';
-
 
 const GlobalStore = configureStore({
   reducer: combineReducers({
     calon: calonSlice,
-    submit: submitCalonSlice
+    submit: submitCalonSlice,
+    capture: captureSlice,
   }),
 });
 
