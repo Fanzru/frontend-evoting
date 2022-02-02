@@ -78,7 +78,9 @@ const FotoDiri = () => {
   useEffect(() => {
     console.log('Tes', isLoaded)
     setTimeout(() => {
-      if (webcamRef.current !== null) setIsLoaded(true)
+      if (webcamRef.current !== null) {
+        setIsLoaded(true)
+      }
     }, 2000)
   }, [webcamRef, isLoaded])
 
@@ -100,44 +102,47 @@ const FotoDiri = () => {
             ) : (
               fotovalue && <img src={fotovalue} />
             )}
-            {/* w-[40rem] h-[30rem] */}
-            {!isLoaded && <span className="w-auto bg-red-300"></span>}
-            <div className="grid w-full grid-cols-3 items-center justify-evenly justify-items-center py-5">
-              {submitFoto ? (
-                <span></span>
-              ) : (
-                <span>
-                  {captureValue && (
-                    <ButtonCapture data={handleSubmit}>
-                      <HiCheck />
-                    </ButtonCapture>
-                  )}
-                </span>
-              )}
-              <span>
-                {!captureValue && (
-                  <ButtonCapture
-                    data={capture}
-                    dataStyle={`tes h-12 hover:bg-red-600 bg-red-500 w-12 ring-red-500 focus:ring-2 focus:ring-offset-2`}
-                  />
+
+            {isLoaded ? (
+              <div className="grid w-full grid-cols-3 items-center justify-evenly justify-items-center py-5">
+                {submitFoto ? (
+                  <span></span>
+                ) : (
+                  <span>
+                    {captureValue && (
+                      <ButtonCapture data={handleSubmit}>
+                        <HiCheck />
+                      </ButtonCapture>
+                    )}
+                  </span>
                 )}
-              </span>
-              {submitFoto ? (
-                <span></span>
-              ) : (
                 <span>
-                  {captureValue ? (
-                    <ButtonCapture data={handleReCapture}>
-                      <HiX />
-                    </ButtonCapture>
-                  ) : (
-                    <ButtonCapture data={handleSwitch}>
-                      <HiRefresh />
-                    </ButtonCapture>
+                  {!captureValue && (
+                    <ButtonCapture
+                      data={capture}
+                      dataStyle={`tes h-12 hover:bg-red-600 bg-red-500 w-12 ring-red-500 focus:ring-2 focus:ring-offset-2`}
+                    />
                   )}
                 </span>
-              )}
-            </div>
+                {submitFoto ? (
+                  <span></span>
+                ) : (
+                  <span>
+                    {captureValue ? (
+                      <ButtonCapture data={handleReCapture}>
+                        <HiX />
+                      </ButtonCapture>
+                    ) : (
+                      <ButtonCapture data={handleSwitch}>
+                        <HiRefresh />
+                      </ButtonCapture>
+                    )}
+                  </span>
+                )}
+              </div>
+            ) : (
+              <span className='text-xl'>Loading...</span>
+            )}
           </div>
         </div>
       </div>
