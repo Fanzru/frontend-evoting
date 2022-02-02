@@ -6,6 +6,7 @@ import ButtonCapture from '../components/buttonCapture'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { changeCapture, selectCaptureValue } from '../redux/captureSlice'
+import { changeFoto, selectFotoValue } from '../redux/fotoSlice'
 
 const FotoDiri = () => {
   const FACING_MODE_USER = 'user'
@@ -14,11 +15,12 @@ const FotoDiri = () => {
   const webcamRef: any = useRef('')
   const [imgSrc, setImgSrc] = useState('')
   const [facingMode, setFacingMode] = useState(FACING_MODE_USER)
-  const [picture, setPicture] = useState('')
+  // const [picture, setPicture] = useState('')
   const dispatch = useDispatch()
   const router = useRouter();
 
   const captureValue = useSelector(selectCaptureValue);
+  const fotovalue = useSelector(selectFotoValue);
 
   const videoConstraints: any = {
     facingMode: FACING_MODE_USER,
@@ -28,6 +30,7 @@ const FotoDiri = () => {
     const imageSrc = webcamRef.current.getScreenshot()
     setImgSrc(imageSrc)
     dispatch(changeCapture(true))
+    dispatch(changeFoto(imageSrc))
   }, [webcamRef, setImgSrc])
 
   const handleSwitch = useCallback(() => {
@@ -45,7 +48,7 @@ const FotoDiri = () => {
   const handleSubmit = async () => {
     try {
       const formData = new FormData()
-      formData.append('file', imgSrc)
+      formData.append('file', fotovalue)
       formData.append('upload_preset', 'my-uploads')
 
       const data = await fetch(
@@ -56,13 +59,12 @@ const FotoDiri = () => {
         }
       ).then((r) => r.json())
 
-      setPicture(data.secure_url)
+      // setPicture(data.secure_url)
       router.push('/pemilihan');
     } catch (e) {
       console.log(e)
     }
   }
-
 
   return (
     <>
@@ -79,37 +81,39 @@ const FotoDiri = () => {
                 videoConstraints={{ ...videoConstraints, facingMode }}
               />
             ) : (
-              imgSrc && <img src={imgSrc} />
+              fotovalue && <img src={fotovalue} />
             )}
 
-            <div className="grid w-full grid-cols-3 items-center justify-evenly justify-items-center py-5">
-              <span>
-                {captureValue && (
-                  <ButtonCapture data={handleSubmit}>
-                    <HiCheck />
-                  </ButtonCapture>
-                )}
-              </span>
-              <span className="h-12">
-                {!captureValue && (
-                  <ButtonCapture
-                    data={capture}
-                    dataStyle={`tes h-12 hover:bg-red-600 bg-red-500 w-12 ring-red-500 focus:ring-2 focus:ring-offset-2`}
-                  />
-                )}
-              </span>
-              <span>
-                {captureValue ? (
-                  <ButtonCapture data={handleReCapture}>
-                    <HiX />
-                  </ButtonCapture>
-                ) : (
-                  <ButtonCapture data={handleSwitch}>
-                    <HiRefresh />
-                  </ButtonCapture>
-                )}
-              </span>
-            </div>
+            {true && (
+              <div className="grid w-full grid-cols-3 items-center justify-evenly justify-items-center py-5">
+                <span>
+                  {captureValue && (
+                    <ButtonCapture data={handleSubmit}>
+                      <HiCheck />
+                    </ButtonCapture>
+                  )}
+                </span>
+                <span className="h-12">
+                  {!captureValue && (
+                    <ButtonCapture
+                      data={capture}
+                      dataStyle={`tes h-12 hover:bg-red-600 bg-red-500 w-12 ring-red-500 focus:ring-2 focus:ring-offset-2`}
+                    />
+                  )}
+                </span>
+                <span>
+                  {captureValue ? (
+                    <ButtonCapture data={handleReCapture}>
+                      <HiX />
+                    </ButtonCapture>
+                  ) : (
+                    <ButtonCapture data={handleSwitch}>
+                      <HiRefresh />
+                    </ButtonCapture>
+                  )}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>
