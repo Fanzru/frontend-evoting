@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 import Step from '../components/step'
 import { HiCheck, HiRefresh, HiX } from 'react-icons/hi'
@@ -7,23 +7,31 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { changeCapture, selectCaptureValue } from '../redux/captureSlice'
 import { changeFoto, selectFotoValue } from '../redux/fotoSlice'
-import { changeSubmitFoto, selectSubmitFotoValue } from '../redux/submitFotoSlice'
+import {
+  changeSubmitFoto,
+  selectSubmitFotoValue,
+} from '../redux/submitFotoSlice'
 
 const FotoDiri = () => {
   const FACING_MODE_USER = 'user'
   const FACING_MODE_ENVIRONMENT = 'environment'
 
-  const webcamRef: any = useRef('')
+  const webcamRef: any = useRef(null)
+  console.log('webcam', webcamRef)
+
   const [facingMode, setFacingMode] = useState(FACING_MODE_USER)
   // const [picture, setPicture] = useState('')
   const dispatch = useDispatch()
-  const router = useRouter();
+  const router = useRouter()
+  const [isLoaded, setIsLoaded] = useState(false)
 
-  const captureValue = useSelector(selectCaptureValue);
-  const fotovalue = useSelector(selectFotoValue);
-  const submitFoto = useSelector(selectSubmitFotoValue);
+  const captureValue = useSelector(selectCaptureValue)
+  const fotovalue = useSelector(selectFotoValue)
+  const submitFoto = useSelector(selectSubmitFotoValue)
 
   const videoConstraints: any = {
+    width: 640,
+    height: 480,
     facingMode: FACING_MODE_USER,
   }
 
@@ -60,12 +68,19 @@ const FotoDiri = () => {
       ).then((r) => r.json())
 
       // setPicture(data.secure_url)
-      dispatch(changeSubmitFoto(true));
-      router.push('/pemilihan');
+      dispatch(changeSubmitFoto(true))
+      router.push('/pemilihan')
     } catch (e) {
       console.log(e)
     }
   }
+
+  useEffect(() => {
+    console.log('Tes', isLoaded)
+    setTimeout(() => {
+      if (webcamRef.current !== null) setIsLoaded(true)
+    }, 2000)
+  }, [webcamRef, isLoaded])
 
   return (
     <>
@@ -80,11 +95,13 @@ const FotoDiri = () => {
                 screenshotFormat="image/jpeg"
                 screenshotQuality={1}
                 videoConstraints={{ ...videoConstraints, facingMode }}
+                className={isLoaded ? 'block' : 'hidden'}
               />
             ) : (
               fotovalue && <img src={fotovalue} />
             )}
-
+            {/* w-[40rem] h-[30rem] */}
+            {!isLoaded && <span className="w-auto bg-red-300"></span>}
             <div className="grid w-full grid-cols-3 items-center justify-evenly justify-items-center py-5">
               {submitFoto ? (
                 <span></span>
@@ -97,7 +114,7 @@ const FotoDiri = () => {
                   )}
                 </span>
               )}
-              <span className="h-12">
+              <span>
                 {!captureValue && (
                   <ButtonCapture
                     data={capture}
