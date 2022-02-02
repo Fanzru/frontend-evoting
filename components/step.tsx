@@ -2,15 +2,22 @@ import { useRouter } from 'next/router'
 import { FaUser, FaUserCheck } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
 import { selectCaptureValue } from '../redux/captureSlice'
+import { selectSubmitFotoValue } from '../redux/submitFotoSlice'
 const Step = () => {
   const router = useRouter()
   const urlString = router.pathname
   const arrUrl = urlString.split('/')
-  const captureValue = useSelector(selectCaptureValue)
+  const submitFoto = useSelector(selectSubmitFotoValue)
 
   const handleClick = (): void => {
-    if (captureValue) {
+    if (submitFoto) {
       router.push('/foto')
+    }
+  }
+
+  const handlePemilihan = (): void => {
+    if (submitFoto) {
+      router.push('/pemilihan')
     }
   }
 
@@ -21,11 +28,7 @@ const Step = () => {
           <div className="flex flex-col items-center">
             <div
               className={`flex h-10 w-10 rounded-full ${
-                true
-                  ? 'bg-red-400'
-                  : true
-                  ? 'bg-green-400'
-                  : 'bg-gray-300'
+                !submitFoto ? 'bg-red-400' : 'bg-green-400'
               } items-center justify-center`}
               onClick={handleClick}
             >
@@ -38,8 +41,9 @@ const Step = () => {
         <div className="flex flex-col items-center">
           <div
             className={`flex h-10 w-10 rounded-full ${
-              arrUrl[1] == 'pemilihan' ? 'bg-red-400' : 'bg-gray-300'
+              submitFoto ? 'bg-red-400' : 'bg-gray-300'
             } items-center justify-center`}
+            onClick={handlePemilihan}
           >
             <FaUserCheck />
           </div>

@@ -7,13 +7,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { changeCapture, selectCaptureValue } from '../redux/captureSlice'
 import { changeFoto, selectFotoValue } from '../redux/fotoSlice'
+import { changeSubmitFoto, selectSubmitFotoValue } from '../redux/submitFotoSlice'
 
 const FotoDiri = () => {
   const FACING_MODE_USER = 'user'
   const FACING_MODE_ENVIRONMENT = 'environment'
 
   const webcamRef: any = useRef('')
-  const [imgSrc, setImgSrc] = useState('')
   const [facingMode, setFacingMode] = useState(FACING_MODE_USER)
   // const [picture, setPicture] = useState('')
   const dispatch = useDispatch()
@@ -21,6 +21,7 @@ const FotoDiri = () => {
 
   const captureValue = useSelector(selectCaptureValue);
   const fotovalue = useSelector(selectFotoValue);
+  const submitFoto = useSelector(selectSubmitFotoValue);
 
   const videoConstraints: any = {
     facingMode: FACING_MODE_USER,
@@ -28,10 +29,9 @@ const FotoDiri = () => {
 
   const capture = useCallback((): void => {
     const imageSrc = webcamRef.current.getScreenshot()
-    setImgSrc(imageSrc)
     dispatch(changeCapture(true))
     dispatch(changeFoto(imageSrc))
-  }, [webcamRef, setImgSrc])
+  }, [webcamRef, changeFoto])
 
   const handleSwitch = useCallback(() => {
     setFacingMode((prevState) =>
@@ -60,6 +60,7 @@ const FotoDiri = () => {
       ).then((r) => r.json())
 
       // setPicture(data.secure_url)
+      dispatch(changeSubmitFoto(true));
       router.push('/pemilihan');
     } catch (e) {
       console.log(e)
@@ -84,8 +85,10 @@ const FotoDiri = () => {
               fotovalue && <img src={fotovalue} />
             )}
 
-            {true && (
-              <div className="grid w-full grid-cols-3 items-center justify-evenly justify-items-center py-5">
+            <div className="grid w-full grid-cols-3 items-center justify-evenly justify-items-center py-5">
+              {submitFoto ? (
+                <span></span>
+              ) : (
                 <span>
                   {captureValue && (
                     <ButtonCapture data={handleSubmit}>
@@ -93,14 +96,18 @@ const FotoDiri = () => {
                     </ButtonCapture>
                   )}
                 </span>
-                <span className="h-12">
-                  {!captureValue && (
-                    <ButtonCapture
-                      data={capture}
-                      dataStyle={`tes h-12 hover:bg-red-600 bg-red-500 w-12 ring-red-500 focus:ring-2 focus:ring-offset-2`}
-                    />
-                  )}
-                </span>
+              )}
+              <span className="h-12">
+                {!captureValue && (
+                  <ButtonCapture
+                    data={capture}
+                    dataStyle={`tes h-12 hover:bg-red-600 bg-red-500 w-12 ring-red-500 focus:ring-2 focus:ring-offset-2`}
+                  />
+                )}
+              </span>
+              {submitFoto ? (
+                <span></span>
+              ) : (
                 <span>
                   {captureValue ? (
                     <ButtonCapture data={handleReCapture}>
@@ -112,8 +119,8 @@ const FotoDiri = () => {
                     </ButtonCapture>
                   )}
                 </span>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
